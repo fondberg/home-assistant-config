@@ -1,0 +1,7 @@
+motion_value:
+  name: Motion value
+  initial: nothing
+alarm_unlocker:
+  name: Last person using the alarm code
+gdrive_file:
+  name: GDrive file

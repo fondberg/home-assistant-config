@@ -1,0 +1,51 @@
+- alias: Motion off detected on Hue 1
+  trigger:
+    platform: state
+    entity_id: binary_sensor.living_room_sensor_motion
+    to: 'off'
+    for: '00:03:00'
+  action:
+    - service: homeassistant.turn_off
+      data:
+        entity_id:
+          - light.hue_hall_uppe
+          - light.hue_printer
+          - switch.trappa
+
+- alias: Motion detected on Hue 1
+  trigger:
+    platform: state
+    entity_id: binary_sensor.living_room_sensor_motion
+    to: 'on'
+  action:
+    - service: light.turn_on
+      data:
+        entity_id:
+          - light.hue_hall_uppe
+          - light.hue_printer
+        brightness: 255
+    - service: switch.turn_on
+      entity_id:
+        - switch.trappa
+
+# hue motion 2
+- alias: Motion off detected on Hue 2
+  trigger:
+    platform: state
+    entity_id: binary_sensor.hobbyrum_sensor_motion
+    to: 'off'
+    for: '00:03:00'
+  action:
+    - service: switch.turn_off
+      entity_id:
+        - switch.fibaro_hobbyrum_tak
+
+- alias: Motion detected on Hue 2
+  trigger:
+    platform: state
+    entity_id: binary_sensor.hobbyrum_sensor_motion
+    to: 'on'
+  action:
+    - service: switch.turn_on
+      entity_id:
+        - switch.fibaro_hobbyrum_tak

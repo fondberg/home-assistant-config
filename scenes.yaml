@@ -1,0 +1,9 @@
+- name: night_time
+  entities:
+    switch.trappa: on
+    light.vart_sovrum:
+      state: on
+      brightness: 255
+      color_temp: 233
+      rgb_color: [255,188,85]
+      transition: 5

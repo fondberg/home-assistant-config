@@ -1,0 +1,18 @@
+systems:
+  - system: 49101
+    # optional list of switches (note, for ability to change, you need to use writeaccess and have payed license)
+    switches:
+      - hot_water_boost
+    # list of units to retrieve data for
+    units:
+    # unit to retrieve data for (0 is the master unit and should always exist)
+      - unit: 0
+        # retrieve categories, leave empty for all, remove tag for none
+        categories: True
+    sensors:
+      - 47555
+      - 49224
+      - 48641
+    
+
+

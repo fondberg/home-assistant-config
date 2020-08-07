@@ -1,0 +1,12 @@
+- alias: Ming is home from IFTTT
+  trigger:
+    platform: event
+    event_type: ifttt_webhook_received
+    event_data:
+      action: ming_home
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.hue_vardagsrums_tak_nya
+        brightness: 255
+        effect: colorloop

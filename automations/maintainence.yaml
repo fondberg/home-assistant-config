@@ -1,0 +1,30 @@
+- alias: test zwave at 2:30am
+  trigger:
+    platform: time
+    at: '2:30:00'
+  action:
+    service: zwave.test_network
+
+- alias: heal zwave at 2:32am
+  trigger:
+    platform: time
+    at: '2:35:00'
+  action:
+    service: zwave.heal_network
+
+- alias: Reboot Once A Week
+  trigger:
+    - platform: time
+      at: '3:00:00'
+  condition:
+    - condition: time
+      weekday:
+        - sun
+        - wed
+  action:
+    - service: notify.pushbullet
+      data:
+        title: 'Restarting hass'
+        message: 'Restarting hass'
+    - delay: '00:01:00'
+    - service: hassio.host_reboot

@@ -1,0 +1,19 @@
+google_actions:
+  filter:
+    include_domains:
+      - switch
+      - light
+      - scene
+      - script
+      - climate
+      - fan
+      - camera
+      - group
+    exclude_entities:
+      - switch.aeotec_zstick_disco_light
+      - light.tak_vardagsrum
+      - light.sovrummet
+      - light.living_room
+      - light.hall_uppe
+      - light.tv_iris
+      - light.front_door

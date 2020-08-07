@@ -1,0 +1,31 @@
+- alias: Turn kitchen lights off when light is low
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.qubino_zmnhdd1_flush_dimmer_power
+      below: 0.4
+      for: '00:00:10'
+#  condition:
+#    - condition: state
+#      entity_id: light.kitchen_spotlights
+#      state: 'off'
+  action:
+    - service: notify.fondberg_home_assistant_niklas_macbook_chrome
+      data:
+        message: Value is below 0.4 turning off spotlights
+    - service: light.turn_off
+      data:
+        entity_id: light.kitchen_spotlights
+
+- alias: Turn to max brightness when turned on
+  trigger:
+    platform: state
+    entity_id: light.kitchen_spotlights
+    to: 'on'
+  action:
+  - service: light.turn_on
+    data:
+      entity_id: light.kitchen_spotlights
+      brightness: 255
+  - service: notify.fondberg_home_assistant_niklas_macbook_chrome
+    data:
+      message: Light turned on

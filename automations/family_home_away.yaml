@@ -1,0 +1,39 @@
+- alias: Family away
+  trigger:
+  - entity_id: group.family_devices
+    platform: state
+    to: 'not_home'
+    for: '00:10:00'
+  condition: []
+  action:
+    - service: persistent_notification.create
+      data:
+        title: Familjen inte hemma
+        message: Familjen är inte hemma
+    - service: ifttt.trigger
+      data: {"event":"family_away"}
+    - service: notify.fondberg_home_assistant_niklas_macbook_chrome
+      data:
+        message: Ingen hemma
+    - service: shell_command.pushbullet_sms
+      data:
+        message: Ingen är hemma
+
+- alias: one family member at least home
+  trigger:
+  - entity_id: group.family_devices
+    platform: state
+    to: 'home'
+  action:
+  - service: persistent_notification.create
+    data:
+      title: familjen hemma
+      message: Familjen (minst 1) är hemma
+  - service: ifttt.trigger
+    data: {"event":"family_home"}
+  - service: notify.fondberg_home_assistant_niklas_macbook_chrome
+    data:
+      message: Någon är hemma
+  - service: shell_command.pushbullet_sms
+    data:
+      message: Någon är hemma

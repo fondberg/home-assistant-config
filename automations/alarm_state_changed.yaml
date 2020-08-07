@@ -1,0 +1,15 @@
+- alias: Alarm status changed
+  trigger:
+    - platform: state
+      entity_id: alarm_control_panel.manvagen_b_alarm
+  action:
+    - service: input_text.set_value
+      data_template:
+        entity_id: input_text.alarm_unlocker
+        value: '{{ trigger.to_state.attributes.changed_by }}'
+    - service: notify.fondberg_home_assistant_niklas_macbook_chrome
+      data_template:
+        message: >
+          Alarm changed from {{ trigger.from_state.state }}
+          to {{ trigger.to_state.state }}
+          by {{ trigger.to_state.attributes.changed_by }}

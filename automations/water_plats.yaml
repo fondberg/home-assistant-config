@@ -1,0 +1,74 @@
+- alias: Water plants in the morning
+  trigger:
+    - platform: time
+      at: '08:00:00'
+  condition:
+    condition: template
+    value_template: '{{states.sensor.precipitation_cumulative_last_day | float < 3.0}}'
+  action:
+    - service: switch.turn_on
+      entity_id: switch.plant_vattnaren
+    - delay:
+        minutes: 1
+    - service: switch.turn_off
+      entity_id: switch.plant_vattnaren
+
+- alias: Water plants in the evening
+  trigger:
+    - platform: time
+      at: '19:30:00'
+  condition:
+    condition: template
+    value_template: '{{states.sensor.precipitation_cumulative_last_day | float < 3.0}}'
+  action:
+    - service: switch.turn_on
+      entity_id: switch.plant_vattnaren
+    - delay:
+        minutes: 1
+    - service: switch.turn_off
+      entity_id: switch.plant_vattnaren
+
+
+- alias: Water plants 1
+  trigger:
+    - platform: time
+      at: '08:00:00'
+  condition:
+    condition: template
+    value_template: '{{states.sensor.precipitation_cumulative_last_day | float < 3.0}}'
+  action:
+    - service: switch.turn_on
+      entity_id: switch.garden_water
+
+- alias: Water plants 2
+  trigger:
+    - platform: time
+      at: '18:00:00'
+  condition:
+    condition: template
+    value_template: '{{states.sensor.precipitation_cumulative_last_day | float < 3.0}}'
+  action:
+    - service: switch.turn_on
+      entity_id: switch.garden_water
+
+- alias: Water plants 3
+  trigger:
+    - platform: time
+      at: '18:20:00'
+  condition:
+    condition: template
+    value_template: '{{states.sensor.precipitation_cumulative_last_day | float < 3.0}}'
+  action:
+    - service: switch.turn_on
+      entity_id: switch.garden_water
+
+- alias: Water plants 4
+  trigger:
+    - platform: time
+      at: '20:20:00'
+  condition:
+    condition: template
+    value_template: '{{states.sensor.precipitation_cumulative_last_day | float < 3.0}}'
+  action:
+    - service: switch.turn_on
+      entity_id: switch.garden_water

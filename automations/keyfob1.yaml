@@ -1,0 +1,163 @@
+# TODO: break out into script and call that with the light entities
+# skrivbord
+- alias: Keyfob 1 longpress
+  trigger:
+    platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      entity_id: zwave.aeotec_zw088_key_fob_gen5
+      scene_id: 2
+  action:
+  - service: homeassistant.turn_off
+    entity_id: light.hue_niklas_skrivbord
+
+- alias: Keyfob 1 short press
+  trigger:
+    platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      entity_id: zwave.aeotec_zw088_key_fob_gen5
+      scene_id: 1
+  action:
+  - service: light.turn_on
+    data_template:
+      entity_id:
+        - light.hue_niklas_skrivbord
+      brightness: >
+        {%- if is_state('light.hue_niklas_skrivbord', 'off') %}
+           255
+        {%- else %}
+          {% set curr = states.light.hue_niklas_skrivbord.attributes.brightness |int %}
+          {%- if curr > 200 -%}
+            150
+          {%- elif curr > 100 -%}
+            50
+          {%- else -%}
+            255
+          {% endif %}
+        {% endif %}
+
+
+# sovrum
+- alias: Keyfob 2 longpress
+  trigger:
+    platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      entity_id: zwave.aeotec_zw088_key_fob_gen5
+      scene_id: 4
+  action:
+  - service: homeassistant.turn_off
+    entity_id: light.sovrummet
+
+- alias: Keyfob 2 short press
+  trigger:
+    platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      entity_id: zwave.aeotec_zw088_key_fob_gen5
+      scene_id: 3
+  action:
+  - service: light.turn_on
+    data_template:
+      entity_id:
+        - light.sovrummet
+      brightness: >
+        {%- if is_state('light.sovrummet', 'off') %}
+           255
+        {%- else %}
+          {% set curr = states.light.sovrummet.attributes.brightness |int %}
+          {%- if curr > 200 -%}
+            150
+          {%- elif curr > 100 -%}
+            50
+          {%- else -%}
+            255
+          {% endif %}
+        {% endif %}
+
+
+# V-RUM
+- alias: Keyfob 3 longpress
+  trigger:
+    platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      entity_id: zwave.aeotec_zw088_key_fob_gen5
+      scene_id: 6
+  action:
+  - service: homeassistant.turn_off
+    entity_id:
+      - light.hue_vardagsrums_tak_gamla
+      - light.hue_iris_1
+      - light.hue_vardagsrums_tak_nya
+
+- alias: Keyfob 3 short press
+  trigger:
+    platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      entity_id: zwave.aeotec_zw088_key_fob_gen5
+      scene_id: 5
+  action:
+  - service: light.turn_on
+    data_template:
+      entity_id:
+        - light.hue_vardagsrums_tak_gamla
+        - light.hue_iris_1
+        - light.hue_vardagsrums_tak_nya
+      brightness: >
+        {%- if is_state('light.hue_vardagsrums_tak_gamla', 'off') %}
+           255
+        {%- else %}
+          {% set curr = states.light.hue_vardagsrums_tak_gamla.attributes.brightness |int %}
+          {%- if curr > 200 -%}
+            150
+          {%- elif curr > 100 -%}
+            50
+          {%- else -%}
+            255
+          {% endif %}
+        {% endif %}
+
+# Köket
+- alias: Keyfob 4 longpress
+  trigger:
+    platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      entity_id: zwave.aeotec_zw088_key_fob_gen5
+      scene_id: 8
+  action:
+  - service: homeassistant.turn_off
+    entity_id:
+    - light.kitchen_spotlights
+    - switch.kitchen_taklampa
+
+- alias: Keyfob 4 short press
+  trigger:
+    platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      entity_id: zwave.aeotec_zw088_key_fob_gen5
+      scene_id: 7
+  action:
+  - service: homeassistant.turn_on
+    entity_id: switch.kitchen_taklampa
+  - service: light.turn_on
+    data_template:
+      entity_id:
+      - light.kitchen_spotlights
+      brightness: >
+        {%- if is_state('light.kitchen_spotlights', 'off') %}
+           255
+        {%- else %}
+          {% set curr = states.light.kitchen_spotlights.attributes.brightness |int %}
+          {%- if curr > 200 -%}
+            50
+          {%- elif curr > 30 -%}
+            25
+          {%- else -%}
+            255
+          {% endif %}
+        {% endif %}

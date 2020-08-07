@@ -1,0 +1,132 @@
+# custom module to support dimming
+#  https://community.home-assistant.io/t/creating-automation-with-z-wave-me-zme-wallc-s-secure-wall-controller/86466/5
+# double tap https://forum.athom.com/discussion/2949/how-to-double-click-zwave-me-wallc-s-wallc-2-makes-8-possible-options
+
+# BUTTON 1 VRUM
+- alias: Wall-C 1
+  trigger:
+    platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      entity_id: zwave.z_wave_me_zme_wallc_s_secure_wall_controller_3
+      scene_id: 1
+      scene_data: 0
+  action:
+    - service: python_script.dim_toggle
+      data:
+        dim_level_entity: light.hue_niklas_skrivbord
+        dim_lights: "light.hue_vardagsrums_tak_gamla, light.hue_niklas_skrivbord, light.hue_iris_1, light.hue_vardagsrums_tak_nya"
+        colorloop: "true"
+
+- alias: Wall-C 1 longpress
+  trigger:
+    platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      entity_id: zwave.z_wave_me_zme_wallc_s_secure_wall_controller_3
+      scene_id: 1
+      scene_data: 2
+  action:
+  - service: light.turn_off
+    data:
+      entity_id:
+        - light.hue_vardagsrums_tak_gamla
+        - light.hue_niklas_skrivbord
+        - light.hue_iris_1
+        - light.hue_vardagsrums_tak_nya
+
+
+
+# BUTTON 2 KÖKET
+- alias: Wall-C 2
+  trigger:
+    platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      entity_id: zwave.z_wave_me_zme_wallc_s_secure_wall_controller_3
+      scene_id: 2
+      scene_data: 0
+  action:
+    - service: homeassistant.turn_on
+      entity_id: switch.kitchen_taklampa
+    - service: python_script.dim_toggle
+      data:
+        dim_level_entity: light.kitchen_spotlights
+        dim_lights: "light.kitchen_spotlights"
+        colorloop: "true"
+
+- alias: Wall-C 2 longpress
+  trigger:
+    platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      entity_id: zwave.z_wave_me_zme_wallc_s_secure_wall_controller_3
+      scene_id: 2
+      scene_data: 2
+  action:
+    - service: homeassistant.turn_off
+      entity_id:
+        - light.kitchen_spotlights
+        - switch.kitchen_taklampa
+
+# BUTTON 3 hall uppe och trapp
+- alias: Wall-C 1
+  trigger:
+    platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      entity_id: zwave.z_wave_me_zme_wallc_s_secure_wall_controller_3
+      scene_id: 3
+      scene_data: 0
+  action:
+  - service: python_script.dim_toggle
+    data:
+      dim_level_entity: light.hue_hall_uppe
+      dim_lights: "light.hue_hall_uppe, light.hue_printer"
+
+- alias: Wall-C 1 longpress
+  trigger:
+    platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      entity_id: zwave.z_wave_me_zme_wallc_s_secure_wall_controller_3
+      scene_id: 3
+      scene_data: 2
+  action:
+  - service: light.turn_off
+    data:
+      entity_id:
+        - light.hue_hall_uppe
+        - light.hue_printer
+
+
+
+# BUTTON 4 SOVRUMMET
+- alias: Wall-C 3
+  trigger:
+    platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      entity_id: zwave.z_wave_me_zme_wallc_s_secure_wall_controller_3
+      scene_id: 4
+      scene_data: 0
+  action:
+    - service: python_script.dim_toggle
+      data:
+        dim_level_entity: light.sovrummet
+        dim_lights: "light.sovrummet"
+        colorloop: "true"
+
+- alias: Wall-C 3 longpress
+  trigger:
+    platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      entity_id: zwave.z_wave_me_zme_wallc_s_secure_wall_controller_3
+      scene_id: 4
+      scene_data: 2
+  action:
+    - service: light.turn_off
+      data:
+        entity_id:
+        - light.sovrummet

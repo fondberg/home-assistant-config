@@ -1,0 +1,368 @@
+resources:
+  - type: module
+    url: >-
+      https://cdn.jsdelivr.net/gh/bramkragten/custom-ui@master/swipe-card/swipe-card.js
+  - type: module
+    url: /hacsfiles/spotify-card/spotify-card.js
+  - type: module
+    url: /hacsfiles/power-wheel-card/power-wheel-card.js
+
+
+
+title: Home Assistant
+views:
+  - badges:
+      - binary_sensor.entredorr
+      - binary_sensor.altandorr_kok_ov_baksida
+      - binary_sensor.balkongdorr_overvaning
+      - binary_sensor.aeotec_zw100_multisensor_6_sensor
+      - device_tracker.noahs_iphone
+      - device_tracker.niklas_s9_lan
+      - device_tracker.philips_hue_lan
+      - device_tracker.google_wifi_office_lan
+      - device_tracker.google_wifi_livingroom_hall
+      - device_tracker.google_wifi_livingroom_lan
+      - device_tracker.nicos_iphone5s_lan
+      - device_tracker.mings_iphone
+      - device_tracker.melanies_iphone_lan
+      - device_tracker.mings_iphone_lan
+      - device_tracker.galaxy_tab_a_lan
+      - device_tracker.apple_tv_lan
+      - device_tracker.verisure_lan
+      - device_tracker.samsung_c460w_lan
+      - sensor.weather_wind_direction
+      - sensor.weather_medium_clouds
+      - sensor.weather_precipitation
+      - sensor.weather_dewpoint_temperature
+      - sensor.weather_cloudiness
+      - sensor.weather_high_clouds
+      - sensor.weather_fog
+      - sensor.weather_wind_speed
+      - sensor.weather_humidity
+      - sensor.weather_temperature
+      - sensor.weather_symbol
+      - sensor.weather_low_clouds
+      - sensor.weather_pressure
+      - sensor.unlocked_by
+      - sensor.internet_local_ip
+      - sensor.internet_status
+      - sensor.verisure_mail
+      - sensor.internet_new_version
+      - sensor.internet_current_version
+      - sensor.internet_uptime
+      - sensor.internet_last_restart
+      - sensor.vrum_ov_humidity
+      - sensor.hall_bv_humidity
+      - sensor.hall_bv_temperature
+      - sensor.kok_ov_temperature
+      - sensor.vrum_ov_temperature
+      - sensor.aeotec_zw100_multisensor_6_temperature
+      - sensor.aeotec_zw100_multisensor_6_luminance
+      - sensor.aeotec_zw100_multisensor_6_relative_humidity
+      - sensor.aeotec_zw100_multisensor_6_ultraviolet
+      - sensor.aeotec_zw100_multisensor_6_alarm_type
+      - sensor.aeotec_zw100_multisensor_6_alarm_level
+      - sensor.aeotec_zw100_multisensor_6_sourcenodeid
+      - sensor.aeotec_zw100_multisensor_6_burglar
+      - sensor.aeotec_zw139_nano_switch_alarm_type
+      - sensor.aeotec_zw139_nano_switch_alarm_level
+      - sensor.aeotec_zw139_nano_switch_sourcenodeid
+      - sensor.aeotec_zw139_nano_switch_heat
+      - sun.sun
+    cards:
+      - entity: alarm_control_panel.manvagen_b_alarm
+        type: alarm-panel
+      - entities:
+          - entity: switch.plug1
+          - entity: switch.plant_vattnaren
+          - entity: switch.garden_water
+          - entity: script.cleanup_kitchen_livingroom
+        title: Switches
+        type: entities
+      - entities:
+          - entity: light.kitchen_spotlights
+          - entity: light.sovrummet
+          - entity: light.hue_vardagsrums_tak_gamla
+          - entity: light.hue_vardagsrums_tak_nya
+          - entity: light.hue_iris_1
+          - entity: light.hue_hall_uppe
+          - entity: light.tv_iris
+          - entity: light.hue_niklas_skrivbord
+          - entity: light.hall_nere
+          - entity: light.hue_tak_nere_1
+          - entity: light.hue_tak_nere_2
+          - entity: light.hue_tak_nere_3
+          - entity: light.hue_printer
+          - entity: light.front_door
+          - entity: light.hue_ute_door
+          - entity: switch.balkong_lampor
+          - entity: switch.trappa
+          - entity: switch.kitchen_taklampa
+          - entity: switch.kitchen_window_lights
+          - entity: switch.fibaro_hobbyrum_tak
+        title: Light
+        type: entities
+      - entities:
+          - input_text.gdrive_file
+          - input_text.motion_value
+          - input_text.alarm_unlocker
+        title: Input text
+        type: entities
+      - entities:
+          - lock.ytterdorren
+        title: Lock
+        type: entities
+      - entity: climate.danfoss_thermostat_kitchen
+        name: Element i köket
+        type: thermostat
+      - entity: climate.thermofloor_as_heatit_thermostat_tf_033_mode
+        name: Vet ej
+        type: thermostat
+      - entity:  climate.thermofloor_as_heatit_thermostat_tf_033_mode_2
+        name: Vet ej
+        type: thermostat
+      - entity: climate.thermofloor_as_heatit_thermostat_tf_033_mode
+        name: Vet ej
+        type: thermostat
+    icon: 'mdi:home'
+    path: default_view
+    title: Home
+  - badges:
+      - device_tracker.melanies_iphone_lan
+      - device_tracker.mings_iphone_lan
+      - device_tracker.mings_iphone
+    cards:
+      - camera_image: camera.livingroom_camera
+        entities: []
+        title: Living room
+        type: picture-glance
+      - cards:
+          - entities:
+              - sensor.thermofloor_badrum_nere_power
+              - sensor.thermofloor_badrum_uppe_power
+              - sensor.thermofloor_hallen_nere_power
+            hours_to_show: 12
+            title: Värmegolv nere 12h
+            type: history-graph
+          - entities:
+              - sensor.thermofloor_badrum_nere_power
+              - sensor.thermofloor_badrum_uppe_power
+              - sensor.thermofloor_hallen_nere_power
+            hours_to_show: 48
+            title: Värmegolv nere 48h
+            type: history-graph
+          - entities:
+              - sensor.thermofloor_badrum_nere_power
+              - sensor.thermofloor_badrum_uppe_power
+              - sensor.thermofloor_hallen_nere_power
+            hours_to_show: 168
+            title: Värmegolv nere 7 Days
+            type: history-graph
+        type: 'custom:swipe-card'
+      - cards:
+          - entities:
+              - sensor.nibe_49101_10069
+            hours_to_show: 24
+            title: Elpris 24h
+            type: history-graph
+          - entities:
+              - sensor.nibe_49101_10069
+            hours_to_show: 48
+            title: Elpris 48h
+            type: history-graph
+          - entities:
+              - sensor.nibe_49101_10069
+            hours_to_show: 168
+            title: Elpris 7 Days
+            type: history-graph
+        type: 'custom:swipe-card'
+    icon: 'mdi:account-multiple'
+    path: family_devices
+    title: Familjens enheter
+  - badges:
+      - sensor.fronius_ac_current
+      - sensor.fronius_ac_frequency
+      - sensor.fronius_ac_power
+      - sensor.fronius_ac_voltage
+      - sensor.fronius_day_energy
+      - sensor.fronius_dc_current
+      - sensor.fronius_dc_voltage
+      - sensor.fronius_house_load
+    cards:
+      - type: 'custom:power-wheel-card'
+        title: Solar Power
+        production_is_positive: false
+        solar_power_entity: sensor.fronius_panel_status
+        grid_power_entity: sensor.fronius_grid_usage
+        home_energy_entity: sensor.fronius_house_load
+      - cards:
+          - entities:
+              - sensor.fronius_ac_current
+              - sensor.fronius_ac_frequency
+              - sensor.fronius_ac_power
+              - sensor.fronius_ac_voltage
+              - sensor.fronius_day_energy
+              - sensor.fronius_dc_current
+              - sensor.fronius_dc_voltage
+            hours_to_show: 12
+            title: Solenergi 12h
+            type: history-graph
+          - entities:
+              - sensor.fronius_ac_current
+              - sensor.fronius_ac_frequency
+              - sensor.fronius_ac_power
+              - sensor.fronius_ac_voltage
+              - sensor.fronius_day_energy
+              - sensor.fronius_dc_current
+              - sensor.fronius_dc_voltage
+            hours_to_show: 24
+            title: Solenergi 24h
+            type: history-graph
+          - entities:
+              - sensor.fronius_ac_current
+              - sensor.fronius_ac_frequency
+              - sensor.fronius_ac_power
+              - sensor.fronius_ac_voltage
+              - sensor.fronius_day_energy
+              - sensor.fronius_dc_current
+              - sensor.fronius_dc_voltage
+            hours_to_show: 48
+            title: Solenergi 48h
+            type: history-graph
+          - entities:
+              - sensor.fronius_ac_current
+              - sensor.fronius_ac_frequency
+              - sensor.fronius_ac_power
+              - sensor.fronius_ac_voltage
+              - sensor.fronius_day_energy
+              - sensor.fronius_dc_current
+              - sensor.fronius_dc_voltage
+            hours_to_show: 168
+            title: Solenergi 7 Days
+            type: history-graph
+        type: 'custom:swipe-card'
+      - cards:
+          - entities:
+              - sensor.nibe_49101_10069
+            hours_to_show: 12
+            title: Elpris 12h
+            type: history-graph
+          - entities:
+              - sensor.nibe_49101_10069
+            hours_to_show: 24
+            title: Elpris 24h
+            type: history-graph
+          - entities:
+              - sensor.nibe_49101_10069
+            hours_to_show: 48
+            title: Elpris 48h
+            type: history-graph
+          - entities:
+              - sensor.nibe_49101_10069
+            hours_to_show: 168
+            title: Elpris 7 Days
+            type: history-graph
+        type: 'custom:swipe-card'
+    icon: 'mdi:weather-sunny'
+    path: fronius
+    title: Solenergi
+  - badges: []
+    cards:
+      - entity: weather.smhi_home
+        name: Vädret
+        type: weather-forecast
+      - aspect_ratio: 90%
+        type: iframe
+        url: 'https://embed.windy.com/embed2.html'
+      - cards:
+          - entities:
+              - sensor.weather_temperature
+              - sensor.vrum_ov_temperature
+              - sensor.aeotec_zw100_multisensor_6_temperature
+              - sensor.danfoss_thermostat_kitchen_temperature
+              - sensor.hall_bv_temperature
+              - sensor.nibe_49101_40004
+            hours_to_show: 12
+            title: Temperatures 12h
+            type: history-graph
+          - entities:
+              - sensor.weather_temperature
+              - sensor.vrum_ov_temperature
+              - sensor.aeotec_zw100_multisensor_6_temperature
+              - sensor.danfoss_thermostat_kitchen_temperature
+              - sensor.hall_bv_temperature
+              - sensor.nibe_49101_40004
+            hours_to_show: 48
+            title: Temperatures 48h
+            type: history-graph
+          - entities:
+              - sensor.weather_temperature
+              - sensor.vrum_ov_temperature
+              - sensor.aeotec_zw100_multisensor_6_temperature
+              - sensor.danfoss_thermostat_kitchen_temperature
+              - sensor.hall_bv_temperature
+              - sensor.nibe_49101_40004
+            hours_to_show: 168
+            title: Temperatures 7 Days
+            type: history-graph
+        type: 'custom:swipe-card'
+      - aspect_ratio: 59%
+        type: iframe
+        url: >-
+          https://api.trafikinfo.trafikverket.se/v1/Images/TrafficFlowCamera_39626463.Jpeg
+      - entity: weather.smhi_home
+        name: Vädret
+        type: weather-forecast
+      - entities:
+          - entity: sensor.processor_use
+          - entity: sensor.memory_use_percent
+          - entity: sensor.network_in_enp0s25
+          - entity: sensor.network_out_enp0s25
+          - entity: sensor.disk_use_percent
+        title: sensorer
+        type: entities
+      - entities:
+          - sensor.processor_use
+          - sensor.memory_use_percent
+          - sensor.network_in_enp0s25
+          - sensor.network_out_enp0s25
+          - sensor.disk_use_percent
+        hours_to_show: 24
+        refresh_interval: 5
+        title: CPU
+        type: history-graph
+    icon: 'mdi:information'
+    path: niklas-panel
+    title: Niklas panel
+  - badges: []
+    cards:
+      - client_id: f38a3e6e4e574c48ad4c9ce70d334861
+        height: 430
+        limit: 10
+        type: 'custom:spotify-card'
+      - entity: media_player.hk_citation_300_e74c2e
+        type: media-control
+      - entity: media_player.google_home
+        type: media-control
+      - entity: media_player.spotify_niklas_fondberg
+        type: media-control
+      - card:
+          entity: media_player.sovrum
+          type: media-control
+        conditions:
+          - entity: media_player.sovrum
+            state_not: unavailable
+        type: conditional
+      - card:
+          entity: media_player.samsung_6_series_55_ue55ku607
+          type: media-control
+        conditions:
+          - entity: media_player.samsung_6_series_55_ue55ku607
+            state_not: unavailable
+        type: conditional
+      - type: media-control
+        entity: media_player.hogtalare_uppe
+    icon: 'mdi:power-socket'
+    panel: false
+    path: dev-ui
+    title: Dev tab

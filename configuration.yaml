@@ -1,0 +1,296 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: 59.23303831
+  longitude: 18.20239771
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: 52
+  # metric for Metric, imperial for Imperial
+  unit_system: metric
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: Europe/Stockholm
+  # Customization file
+  customize: !include customize.yaml
+  # Packages
+  # packages: !include_dir_named packages
+
+# Use yaml mode for lovelace
+# lovelace:
+#   mode: yaml
+
+# Enables the frontend
+frontend:
+  themes: !include_dir_merge_named themes
+
+logger:
+  default: info
+  logs:
+    custom_components.spotcast: debug
+    custom_components.easee: debug
+    easee.easee: debug
+    homeassistant.components.cloud.iot: info
+    homeassistant.components.device_tracker: critical
+
+# Enables configuration UI
+config:
+
+# Discover some devices automatically
+discovery:
+
+# MQTT, configured thru integrations page
+# mqtt:
+#   broker: core-mosquitto
+#   discovery: 
+#   discovery_prefix: homeassistant
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+# Enables support for tracking state changes over time
+history:
+
+# View all events in a logbook
+logbook:
+
+recorder:
+  db_url: !secret maria_db_url
+  purge_keep_days: 30
+  include:
+    entities:
+      - sensor.thermofloor_badrum_nere_power
+      - sensor.thermofloor_badrum_uppe_power
+      - sensor.thermofloor_hallen_nere_power
+      # temp humidity
+      - sensor.nibe_49101_40004
+      - sensor.weather_temperature
+      - sensor.vrum_ov_temperature
+      - sensor.aeotec_zw100_multisensor_6_temperature
+      - sensor.danfoss_thermostat_kitchen_temperature
+      - sensor.living_room_sensor_temperature
+      - sensor.hobbyrum_sensor_temperature
+      - sensor.hall_bv_temperature
+      - sensor.kok_ov_temperature
+      - sensor.hall_bv_humidity
+      - sensor.hobbyrum_sensor_temperature
+      # machine
+      - sensor.processor_use
+      - sensor.memory_use_percent
+      - sensor.network_in_eth0enp0s25
+      - sensor.network_out_enp0s25
+      - sensor.disk_use_percent
+      - sensor.internet_status
+      # outdoor temp
+      - sensor.nibe_49101_40004
+      # hot water charging
+      - sensor.nibe_49101_40014
+      - sensor.nibe_49101_40077
+      # hot water top
+      - sensor.nibe_49101_40013
+      - sensor.nibe_49101_40078
+      # heating
+      - sensor.nibe_49101_44896
+      # hot water
+      - sensor.nibe_49101_44897
+      # S1 supply
+      - climate.nibe_49101_s1_supply
+      # S1 Room
+      - climate.nibe_49101_s1_room
+      # pump speed heating medium
+      - sensor.nibe_49101_43181
+      - sensor.unlocked_by
+      #växt sensor
+      - sensor.vaextsensor01_humidity 
+      - sensor.vaextsensor01_soil_sensor
+      - sensor.vaextsensor01_temperatur
+      # fronius  
+      - sensor.fronius_ac_current
+      - sensor.fronius_ac_frequency
+      - sensor.fronius_ac_power
+      - sensor.fronius_ac_voltage
+      - sensor.fronius_day_energy
+      - sensor.fronius_dc_current
+      - sensor.fronius_dc_voltage
+      - sensor.fronius_grid_usage
+      - sensor.fronius_house_load
+      - sensor.fronius_panel_status
+      # electricity price
+      - sensor.nibe_49101_10069
+      # weather
+      - sensor.weather_temperature
+      - sensor.weather_wind_speed
+      - sensor.weather_pressure
+      - sensor.weather_precipitation
+      - sensor.weather_humidity
+      - sensor.weather_cloudiness
+      - sensor.weather_wind_speed
+      - sensor.precipitation_cumulative_last_day
+      # motion
+      - binary_sensor.hobbyrum_sensor_motion
+      - binary_sensor.living_room_sensor_motion
+      - sensor.aeotec_zw100_multisensor_6_burglar
+      #Octoprint
+      - binary_sensor.octoprint_printing
+      - binary_sensor.octoprint_printing_error
+      # current consumption
+      # Adrians
+      - sensor.shelly_shplg_s_7a2e6f_current_consumption
+      # Office 
+      - sensor.shelly_shplg_s_7a3549_current_consumption
+      # trappan 
+      - sensor.shelly_shplg_s_801101_current_consumption
+      # växtbordet
+      - sensor.shelly_shplg_s_dbe9df_current_consumption
+
+
+# add weather as platform
+# weather:
+#  - platform: smhi
+
+# Remote access
+http:
+  # base_url: https://fondberg.duckdns.org:8123
+  ssl_certificate: /ssl/fullchain.pem
+  ssl_key: /ssl/privkey.pem
+
+
+# Enable zwave aeotec stick 60000 is the default interval
+zwave:
+  # usb_path: /dev/serial/by-id/usb-0658_0200-if00
+  # usb_path: /dev/ttyACM0
+  usb_path: /dev/serial/by-id/usb-0658_0200-if00
+  device_config: !include zwave_device_config.yaml
+  network_key: "0xF3, 0x52, 0x6B, 0xE8, 0x61, 0x39, 0x9F, 0x44, 0x44, 0xC1, 0xE9, 0xDD, 0xAF, 0xBE, 0xEB, 0x43"
+
+# PRESENCE
+# bayesian https://community.home-assistant.io/t/whats-the-best-way-to-tell-home-assistant-that-im-home/64059/8
+device_tracker:
+  - platform: nmap_tracker
+    hosts: 192.168.86.0/24
+    exclude:
+      - 192.168.86.36
+    home_interval: 30
+    interval_seconds: 180
+    new_device_defaults:
+      track_new_devices: true
+#  - platform: bluetooth_tracker
+
+# Enables a map showing the location of tracked devices
+map:
+
+# Track the sun
+sun:
+
+# Text to speech
+tts:
+  - platform: google_translate
+    service_name: google_translate_say
+    language: 'sv'
+
+#https://www.home-assistant.io/components/system_health/
+system_health:
+
+# https://www.home-assistant.io/components/python_script/
+python_script:
+
+cloud: !include cloud.yaml
+group: !include groups.yaml
+automation: !include automations.yaml
+automation old: !include_dir_merge_list automations/
+script: !include scripts.yaml
+scene: !include scenes.yaml
+sensor: !include sensors.yaml
+notify: !include notifications.yaml
+nibe: !include nibe.yaml
+easee:
+  
+
+#### Inputs
+input_text: !include input_text.yaml
+
+input_boolean:
+  switch_tv:
+    name: My test boolean
+    initial: off
+
+twilio:
+  account_sid: !secret twilio_account_sid
+  auth_token: !secret twilio_account_auth_token
+
+# Verisure
+verisure:
+  username: !secret verisure_username
+  password: !secret verisure_password
+  code_digits: 6
+
+# IFTTT
+ifttt:
+  key: !secret ifttt_key
+
+switch:
+  - platform: rest
+    name: Garden water
+    resource: http://192.168.86.246/ha-switch
+    body_on: '{"active": "true"}'
+    body_off: '{"active": "false"}'
+    is_on_template: '{{ value_json.is_active }}'
+    headers:
+      Content-Type: application/json
+    verify_ssl: false
+  - platform: rest
+    name: plant vattnaren
+    resource: http://192.168.86.44/ha-switch
+    body_on: '{"active": "true"}'
+    body_off: '{"active": "false"}'
+    is_on_template: '{{ value_json.is_active }}'
+    headers:
+      Content-Type: application/json
+    verify_ssl: false
+  - platform: command_line
+    switches:
+      aeotec_zstick_disco_light:
+        friendly_name: 'Aeotec Z-Stick Disco Light'
+        command_on: 'echo -e -n "\x01\x08\x00\xF2\x51\x01\x01\x05\x01\x50" > /dev/ttyZWave'
+        command_off: 'echo -e -n "\x01\x08\x00\xF2\x51\x01\x00\x05\x01\x51" > /dev/ttyZWave'
+
+shell_command:
+  pushbullet_sms: bash /config/shell_scripts/pushbullet_sms.sh "{{message}}"
+
+# Spotify
+spotify:
+  client_id: !secret spotify_client_id
+  client_secret: !secret spotify_client_secret
+
+camera:
+  - platform: mjpeg
+    name: Livingroom Camera
+    mjpeg_url: http://192.168.86.152/video/mjpg.cgi
+    still_image_url: http://192.168.86.152/image/jpeg.cgi
+    username: !secret dlink_932_cam_user
+    password: !secret dlink_932_cam_pass
+    authentication: basic
+
+vacuum:
+  - platform: xiaomi_miio
+    host: 192.168.86.146
+    token: !secret xiaomi_token
+
+spotcast:
+  sp_dc: !secret spotify_username
+  sp_key: !secret spotify_password
+
+tibber:
+  access_token: !secret tibber_token
+
+shelly:
+  cloud_auth_key: !secret shelly_key
+  cloud_server: "https://shelly-16-eu.shelly.cloud"
+  sensors:
+    - all
+
+
+octoprint:
+  host: 192.168.86.26
+  api_key: !secret octoprint_key
+  bed: true
+  number_of_tools: 1

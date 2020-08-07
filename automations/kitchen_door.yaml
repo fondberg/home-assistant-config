@@ -1,0 +1,11 @@
+- alias: Kitchen door open
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.altandorr_kok_ov_baksida
+  action:
+    - service: persistent_notification.create
+      data_template:
+        title: kitchen door
+        notification_id: kitchen_door
+        message: >
+          Dörren i köket är: {{ states.binary_sensor.altandorr_kok_ov_baksida.state }}

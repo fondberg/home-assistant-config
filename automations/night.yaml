@@ -1,0 +1,62 @@
+- alias: Night actions
+  trigger:
+    - platform: time
+      at: '22:00:00'
+  action:
+    - service: light.turn_off
+      data:
+        entity_id:
+          - light.hue_vardagsrums_tak_gamla
+          - light.hue_vardagsrums_tak_nya
+          - light.hue_niklas_skrivbord
+    - service: homeassistant.turn_off
+      entity_id:
+        - switch.fibaro_hobbyrum_tak
+    - service: light.turn_on
+      data:
+        entity_id:
+          - light.hue_hall_uppe
+          - light.hue_printer
+        brightness: 50
+    - service: persistent_notification.create
+      data:
+        notification_id: night_lights
+        title: Night lights
+        message: Night lights off run
+
+- alias: Lower the heat in the night and day
+  trigger:
+    platform: time
+    at: "23:00:00"
+  action:
+  - service: climate.set_temperature
+    data:
+      entity_id: climate.thermofloor_as_heatit_thermostat_tf_033_mode
+      temperature: 20
+  - service: climate.set_temperature
+    data:
+      entity_id: climate.thermofloor_as_heatit_thermostat_tf_033_mode_2
+      temperature: 20
+  - service: climate.set_temperature
+    data:
+      entity_id: climate.thermofloor_as_heatit_thermostat_tf_033_mode_3
+      temperature: 20
+
+
+- alias: Raise the heat in the evening
+  trigger:
+    platform: time
+    at: "17:00:00"
+  action:
+  - service: climate.set_temperature
+    data:
+      entity_id: climate.thermofloor_as_heatit_thermostat_tf_033_mode
+      temperature: 20
+  - service: climate.set_temperature
+    data:
+      entity_id: climate.thermofloor_as_heatit_thermostat_tf_033_mode_3
+      temperature: 20
+  - service: climate.set_temperature
+    data:
+      entity_id: climate.thermofloor_as_heatit_thermostat_tf_033_mode_2
+      temperature: 24

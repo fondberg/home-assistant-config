@@ -1,0 +1,20 @@
+- alias: Frontdoor unlocked
+  trigger:
+    platform: state
+    entity_id: sensor.verisure_mail
+    to: 'Misslyckad låsning'
+    for: '00:03:00'
+  action:
+    - service: persistent_notification.create
+      data:
+        notification_id: door_unlocked
+        title: Dörren olåst
+        message: Dörren är olåst
+    - service: notify.fondberg_home_assistant_niklas_macbook_chrome
+      data_template:
+        message: >
+          Dörren är olåst {{ trigger.now }}
+    - service: shell_command.pushbullet_sms
+      data_template:
+        message: >
+          Dörren är olåst {{ trigger.now }}

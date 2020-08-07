@@ -1,0 +1,22 @@
+- alias: Clean home
+  trigger:
+    - entity_id: group.family_devices
+      platform: state
+      to: 'not_home'
+      for: '00:10:00'
+  condition: []
+  action:
+    - service: persistent_notification.create
+      data_template:
+        title: Roboten startar för ingen är hemma
+        notification_id: vacuum_auto_start_no_home
+        message: Ingen hemma städar lite
+    - service: vacuum.xiaomi_clean_zone
+      data:
+        entity_id: vacuum.xiaomi_vacuum_cleaner
+        repeats: 1
+        zone:
+          - - 25014
+            - 25050
+            - 29114
+            - 29350

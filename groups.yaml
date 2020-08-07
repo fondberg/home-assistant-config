@@ -1,0 +1,26 @@
+# https://git.ethitter.com/open-source/Home-Assistant-Config/blob/master/groups.yaml
+# https://github.com/jtscott/hass-config/blob/626215148a2e42ed372dfe208ad33f339076f8d0/groups_views/view_home.yaml
+
+# family_devices:
+#   name: Familjens enheter
+#   icon: mdi:account-multiple
+#   entities:
+#     - device_tracker.alex_galaxy_s9_lan
+#     - device_tracker.alex_bt_s9
+#     - device_tracker.niklas_galaxy_s10_lan
+#     - device_tracker.noahs_iphone_lan_2
+#     - devide_tracker.noahs_iphone_2_bt
+#     - device_tracker.melanies_iphone_lan
+#     - device_tracker.mings_iphone_lan
+#     - device_tracker.mings_iphone
+#     - device_tracker.mings_airpods
+#     - device_tracker.nicos_iphone5s_lan
+evening_lights:
+  name: Evening lights
+  entities:
+    - light.hue_ute_door
+    - light.hue_printer
+    - switch.trappa
+
+#  niklas_gears3_88cd_lan
+#  niklas_gear_s3_88cd

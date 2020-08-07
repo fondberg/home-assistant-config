@@ -1,0 +1,8 @@
+- platform: html5
+  name: fondberg-home-assistant
+  vapid_pub_key: !secret notify_html5_vapid_api_pub_key
+  vapid_prv_key: !secret notify_html5_vapid_api_prv_key
+  vapid_email: !secret notify_html5_vapid_email
+- platform: pushbullet
+  name: pushbullet
+  api_key: !secret pushbullet_token

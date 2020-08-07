@@ -1,0 +1,80 @@
+ming_home:
+  alias: Ming är hemma
+  sequence:
+    - service: tts.google_say
+      data:
+        entity_id: media_player.hk_citation_300_e74c2e
+        message: Välkommen hem Ming
+        language: sv
+    - service: light.turn_on
+      data:
+        entity_id: light.vart_sovrum
+        brightness: 255
+        effect: colorloop
+backup:
+  alias: Create one backup
+  sequence:
+    - service: hassio.snapshot_full
+      data_template:
+        name: Manual Backup {{ now().strftime('%Y-%m-%d') }}
+    - service: persistent_notification.create
+      data_template:
+        title: Backup created
+        message: Creating backup
+    - delay: '00:20:00'
+    - service: hassio.addon_stdin
+      data_template:
+        addon: "7be23ff5_dropbox_sync"
+        input: {"command":"upload"}
+        
+cleanup_kitchen:
+  alias: Clean kitchen
+  sequence:
+    - service: xiaomi_miio.vacuum_clean_zone
+      data:
+        entity_id: vacuum.xiaomi_vacuum_cleaner
+        repeats: 1
+        zone:
+          - - 25014
+            - 25050
+            - 29114
+            - 29350
+
+cleanup_kitchen_livingroom:
+  alias: Clean kitchen and livingroom
+  sequence:
+    - service: xiaomi_miio.vacuum_clean_zone
+      data:
+        entity_id: vacuum.xiaomi_vacuum_cleaner
+        repeats: 1
+        zone: [[17921,23570,22121,29720],[22135,21622,26335,26572],[20977,19825,22177,23625]]
+
+start_spotify_public_enemy:
+  alias: Start public enemy on uppe
+  sequence:
+    - service: spotcast.start
+      data:
+        device_name: "Kök"
+        uri : "spotify:playlist:37i9dQZF1DX3yvAYDslnv8"
+        random_song: true
+
+# device_tracker.raspotify
+start_office_spotify:
+  alias: Start summar rewind in office
+  sequence:
+    - service: spotcast.start
+      data:
+        spotify_device_id: "98bb0735e28656bac098d927d410c3138a4b5bca"
+        uri : "spotify:playlist:37i9dQZF1CAiFMqgF92dBd"
+        random_song: true
+
+start_babblarna_spotify:
+  alias: Start babblarna
+  sequence:
+    - service: spotcast.start
+      data:
+        device_name: "Kök"
+        uri : "spotify:artist:1aA5OGASCVhznQYm71BMYg"
+        random_song: true
+
+        

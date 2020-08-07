@@ -1,0 +1,21 @@
+- alias: GDrive latest file
+  trigger:
+    platform: event
+    event_type: ifttt_webhook_received
+    event_data:
+      action: gdrive_file
+  action:
+    service: input_text.set_value
+    data_template:
+      entity_id: input_text.gdrive_file
+      value: '{{ trigger.event.data.filename }}'
+
+- alias: Nexa remote
+  trigger:
+    platform: webhook
+    webhook_id: remote_1_1
+  action:
+    service: input_text.set_value
+    data_template:
+      entity_id: input_text.gdrive_file
+      value: '{{ trigger.data }} PELLE'

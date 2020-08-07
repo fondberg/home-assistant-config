@@ -1,0 +1,18 @@
+device_tracker.philips_htl2160:
+  hidden: true
+device_tracker.go_play_bt:
+  hidden: true
+device_tracker.phl_qm164e:
+  hidden: true
+light.hall_uppe:
+  hidden: true
+light.front_door:
+  hidden: true
+light.living_room:
+  hidden: true
+light.tak_vardagsrum:
+  hidden: true
+light.vart_sovrum:
+  hidden: true
+switch.aeotec_zw139_nano_switch_switch:
+  friendly_name: Balkong lampor
