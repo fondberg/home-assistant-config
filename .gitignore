@@ -6,7 +6,7 @@
 !*.md
 !automations
 !zwcfg_0xe71e2c3e.xml
-storage/lovelace
+!python_scripts/
 
 # Ignore folders.
 .storage
@@ -17,3 +17,5 @@ storage/lovelace
 ip_bans.yaml
 secrets.yaml
 known_devices.yaml
+
+!.storage/lovelace
