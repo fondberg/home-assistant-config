@@ -11,7 +11,7 @@
     - service: switch.turn_off
       entity_id:
         - switch.balkong_lampor
-        - switch.trappa
+        - switch.shelly_shplg_s_801101
         - switch.kitchen_taklampa
         - switch.kitchen_window_lights
 

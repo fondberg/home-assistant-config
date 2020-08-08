@@ -1,7 +1,7 @@
 - alias: Motion off detected on Hue 1
   trigger:
     platform: state
-    entity_id: binary_sensor.living_room_sensor_motion
+    entity_id: binary_sensor.presence_2
     to: 'off'
     for: '00:03:00'
   action:
@@ -10,12 +10,12 @@
         entity_id:
           - light.hue_hall_uppe
           - light.hue_printer
-          - switch.trappa
+          - switch.shelly_shplg_s_801101
 
 - alias: Motion detected on Hue 1
   trigger:
     platform: state
-    entity_id: binary_sensor.living_room_sensor_motion
+    entity_id: binary_sensor.presence_2
     to: 'on'
   action:
     - service: light.turn_on
@@ -26,7 +26,7 @@
         brightness: 255
     - service: switch.turn_on
       entity_id:
-        - switch.trappa
+        - switch.shelly_shplg_s_801101
 
 # hue motion 2
 - alias: Motion off detected on Hue 2

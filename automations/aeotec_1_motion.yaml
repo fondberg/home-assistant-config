@@ -7,6 +7,8 @@
     - service: light.turn_off
       data:
         entity_id: light.hall_nere
+    - service: switch.turn_off
+      entity_id: switch.shelly_shplg_s_801101
 
 - alias: Motion detected on Aeotec
   trigger:
@@ -18,3 +20,5 @@
       data:
         entity_id: light.hall_nere
         brightness: 255
+    - service: switch.turn_on
+      entity_id: switch.shelly_shplg_s_801101

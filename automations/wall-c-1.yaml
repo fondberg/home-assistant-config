@@ -14,8 +14,8 @@
   action:
     - service: python_script.dim_toggle
       data:
-        dim_level_entity: light.hue_niklas_skrivbord
-        dim_lights: "light.hue_vardagsrums_tak_gamla, light.hue_niklas_skrivbord, light.hue_iris_1, light.hue_vardagsrums_tak_nya"
+        dim_level_entity: light.hue_iris_1
+        dim_lights: "light.hue_vardagsrums_tak_gamla, light.hue_iris_1, light.hue_vardagsrums_tak_nya"
         colorloop: "true"
 
 - alias: Wall-C 1 longpress
@@ -31,7 +31,6 @@
     data:
       entity_id:
         - light.hue_vardagsrums_tak_gamla
-        - light.hue_niklas_skrivbord
         - light.hue_iris_1
         - light.hue_vardagsrums_tak_nya
 

@@ -20,7 +20,6 @@ evening_lights:
   entities:
     - light.hue_ute_door
     - light.hue_printer
-    - switch.trappa
 
 #  niklas_gears3_88cd_lan
 #  niklas_gear_s3_88cd

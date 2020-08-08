@@ -8,7 +8,7 @@
         entity_id:
           - light.hue_vardagsrums_tak_gamla
           - light.hue_vardagsrums_tak_nya
-          - light.hue_niklas_skrivbord
+          - light.niklas_skrivbord
     - service: homeassistant.turn_off
       entity_id:
         - switch.fibaro_hobbyrum_tak

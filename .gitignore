@@ -2,11 +2,14 @@
 *
 # You can whitelist files/folders with !, these will not be ignored.
 !*.yaml
+!*.py
 !.gitignore
 !*.md
 !automations
 !zwcfg_0xe71e2c3e.xml
-!python_scripts/
+!python_scripts
+# link to .storage/lovelace
+!lovelace.json 
 
 # Ignore folders.
 .storage
@@ -18,4 +21,3 @@ ip_bans.yaml
 secrets.yaml
 known_devices.yaml
 
-!.storage/lovelace
